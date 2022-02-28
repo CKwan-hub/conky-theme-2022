@@ -1,0 +1,126 @@
+conky.config = {
+
+    background = true,
+    use_xft = true,
+    font = 'Iosevka:size=10',
+	xftalpha = 0.8,
+    update_interval = 0.5,
+	total_run_times = 0,
+    own_window = true,
+    own_window_transparent =  false,
+    own_window_argb_visual = true,
+    own_window_argb_value = 140,
+    own_window_colour = '#050505',
+    own_window_type = 'normal',
+    own_window_class = 'conky',
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    double_buffer = true,
+    draw_shades = false,
+    draw_outline = false,
+    draw_graph_borders = true,
+    draw_borders = false,
+	stippled_borders = 1,
+	border_width = 1,
+	default_outline_color = 'black',
+	alignment = 'top_right',
+
+    gap_x = 5,
+    gap_y = 5,
+    maximum_width = 300,
+        minimum_height = 1080,
+    border_inner_margin = 0,
+    border_outer_margin = 0,
+
+    override_utf8_locale = false,
+    text_buffer_size = 2048,
+
+    default_color = '#FFFFFF',
+    color1 = '#009DAE',
+    color2 = '#71DFE7',
+    color3 = '#C2FFF9',
+    color4 = '#FFE652',
+    color5 = '#B91646',
+
+    cpu_avg_samples = 2,
+    net_avg_samples = 2,
+	no_buffers = true,
+	override_utf8_locale = true,
+	use_spacer = 'right',
+        out_to_console = false,
+        out_to_stderr = false,
+        extra_newline = false,
+
+}
+
+
+conky.text = [[
+
+
+# ${font}${color3}    CAUTION 
+# ${alignc}${color2}${blink CAUTION} 
+# ${alignr}${color5}CAUTION    
+# ${alignc}${font}${color3}YOU ARE UNDER ARREST
+${color2}${alignc}${image ~/Downloads/manjarologo.jpg -p 5,5 -s 290x290}${voffset 260}
+${font 5x7:bold:size=10}${color4}INFO ${hr 1}
+${color2}${font}${alignc}${color}${kernel} ${sysname}
+${color2}${font}Node:${color} ${nodename}${color2}${font}${alignr}Uptime: ${color}${uptime}
+
+${color4}${font 5x7:bold:size=10}PROCESSOR ${hr 1}
+${color}${font 5x7:size=10}${execi 1000 cat /proc/cpuinfo | grep 'model name' | sed -e 's/model name.*: //'| uniq | cut -c 1-40}
+${color2}${cpubar}
+${color4}${cpugauge cpu1 30,75}${color4}${cpugauge cpu2 30,75}${color4}${cpugauge cpu3 30,75}${color4}${cpugauge cpu4 30,75}
+${color}${voffset -20}${hr 1}
+${color2}${font}${freq_g 1} - ${if_match "${execi 5 sensors|grep 'Core '| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:size=9}${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}\
+${color2}${font}${freq_g 2} - ${if_match "${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:size=9}${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}\
+${color2}${font}${freq_g 3} - ${if_match "${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:size=9}${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}\
+${color2}${font}${freq_g 4} - ${if_match "${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:size=9}${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}  
+${color4}${font 5x7:size=10}Fan Speed: ${hwmon 3 fan 1} RPM${alignr}Load: ${cpu cpu0}%
+ 
+# Use this if the hwmon starts misbehaving ${ibm_fan}
+${color4}${font 5x7:bold:size=10}PROCESSES ${hr 1} ${alignr}${processes} 
+${color2}${font}${top name 1}${goto 75}${color4}${top cpu 1}${goto 110}${top mem 1}${color2}${goto 150}${font}${top name 4}${color4}${goto 220}${top cpu 4}${goto 260}${top mem 4}
+${color2}${font}${top name 2}${goto 75}${color4}${top cpu 2}${goto 110}${top mem 2}${color2}${goto 150}${font}${top name 5}${color4}${goto 220}${top cpu 5}${goto 260}${top mem 5}
+${color2}${font}${top name 3}${goto 75}${color4}${top cpu 3}${goto 110}${top mem 3}${color2}${goto 150}${font}${top name 6}${color4}${goto 220}${top cpu 6}${goto 260}${top mem 6}
+
+${color4}${font 5x7:bold:size=10}MEMORY ${hr 1}
+${color}${font}RAM ${alignr}$memperc% ($mem/${memmax})
+${color}${font}Swap${alignr}${swapperc}% ($swap/${swapmax})
+
+${color4}${font 5x7:bold:size=10}DISK ${hr 1}     
+${color2}${font}Arch: ${fs_free /} / ${fs_size /} ${color4}${alignr}${diskiograph sdb2 13,135 FFE652 C2FFF9 -l}
+${color2}${font}Win: ${fs_free /run/media/alois/E6F4F454F4F42887/} / ${fs_size /run/media/alois/E6F4F454F4F42887}\
+${color4}${alignr}${diskiograph sda 13,135 FFE652 C2FFF9 -l}
+${color2}${font}Kali: ${fs_free /run/media/alois/387bee6d-7489-4004-b785-10d88389d6b9/} / ${fs_size /run/media/alois/387bee6d-7489-4004-b785-10d88389d6b9/}\
+${color4}${alignr}${diskiograph sdc 13,135 FFE652 C2FFF9 -l}
+${color2}${font}Aux: ${fs_free /run/media/alois/6331-6130/} / ${fs_size /run/media/alois/6331-6130/}\
+${color4}${alignr}${diskiograph mmcblk0p1 13,135 FFE652 C2FFF9 -l}
+
+${color4}${font 5x7:bold:size=10}NETWORK ${hr 1}
+${color2}${font 5x7:bold:size=9}Net1 - Signal Strength ${alignr}${wireless_link_qual_perc wlp3s0}%
+${color}${font 5x7:size=9}Upload speed: ${upspeed wlp3s0} ${color}${font 5x7:size=9}${alignr}Down speed: ${downspeed wlp3s0}
+${upspeedgraph wlp3s0 18,148 FFE652 FFE652 -l}${alignr}${downspeedgraph wlp3s0 18,148 FFE652 FFE652 -l}
+${color2}${font 5x7:bold:size=9}Net2 - Signal Strength ${alignr}${wireless_link_qual_perc wlp0s29u1u5}%
+${color}${font 5x7:size=9}Upload speed: ${upspeed wlp0s29u1u5} ${color}${font 5x7:size=9}${alignr}Down speed: ${downspeed wlp0s29u1u5}
+${upspeedgraph wlp0s29u1u5 18,148 71DFE7 71DFE7 -l}${alignr}${downspeedgraph wlp0s29u1u5 18,148 71DFE7 71DFE7 -l}
+
+${color4}${font 5x7:bold:size=10}POWER ${hr 1}
+${color}${font 5x7:bold:size=9}Status: ${alignr}${battery_short} ${battery_time}
+${if_match "${battery_percent}" <="25"}${color5}\
+${else}${if_match "${battery_percent}" < "60" }${color4}${endif}\
+${endif}\
+${color}${battery_bar 10,300}
+${color4}${font Source Code Pro Light:bold:size=16}${time %A}, ${color2 CDE0E7}${time  %b} ${color2}${time %d} ${color2}${time %Y}${font}
+
+]]

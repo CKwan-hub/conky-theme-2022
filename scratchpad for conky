@@ -1,0 +1,22 @@
+${color}${font}Core1 - ${freq_g 0} GHz - ${if_match "${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:bold:size=9}${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${font 5x7:bold:size=9}${color}${alignr}${cpu cpu0}%  
+${color}${font}${cpugraph cpu0 15,300 009DAE C2FFF9 -l}
+${color}${font}Core2 - ${freq_g 1} GHz - ${if_match "${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:bold:size=9}${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${font 5x7:bold:size=9}${color}${alignr}${cpu cpu1}%  
+${color}${font}${cpugraph cpu1 15,300 009DAE C2FFF9 -l}
+${color}${font}Core3 - ${freq_g 2} GHz - ${if_match "${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:bold:size=9}${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${font 5x7:bold:size=9}${color}${alignr}${cpu cpu2}%  
+${color}${font}${cpugraph cpu2 15,300 009DAE C2FFF9 -l}
+${color}${font}Core4 - ${freq_g 3} GHz - ${if_match "${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+    ${else}${if_match "${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
+${endif}\
+${font 5x7:bold:size=9}${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C ${font 5x7:bold:size=9}${color}${alignr}${cpu cpu3}%  
+${color}${font}${cpugraph cpu3 15,300 009DAE C2FFF9 -l}
+
+# ${color}${cpugraph 15,300 262834 777777 -l}
