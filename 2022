@@ -70,23 +70,23 @@ ${color}${font 5x7:size=10}${execi 1000 cat /proc/cpuinfo | grep 'model name' | 
 ${color2}${cpubar}
 ${color4}${cpugauge cpu1 30,75}${color4}${cpugauge cpu2 30,75}${color4}${cpugauge cpu3 30,75}${color4}${cpugauge cpu4 30,75}
 ${color}${voffset -20}${hr 1}
-${color2}${font}${freq_g 1} - ${if_match "${execi 5 sensors|grep 'Core '| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+${color2}${font}${freq_g 1} - ${if_match "${execi 5 sensors|grep 'Core '| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${color5}\
     ${else}${if_match "${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
 ${endif}\
 ${font 5x7:size=9}${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}\
-${color2}${font}${freq_g 2} - ${if_match "${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+${color2}${font}${freq_g 2} - ${if_match "${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${color5}\
     ${else}${if_match "${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
 ${endif}\
 ${font 5x7:size=9}${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}\
-${color2}${font}${freq_g 3} - ${if_match "${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+${color2}${font}${freq_g 3} - ${if_match "${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${color5}\
     ${else}${if_match "${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
 ${endif}\
 ${font 5x7:size=9}${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}\
-${color2}${font}${freq_g 4} - ${if_match "${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${blink !!}${color5}\
+${color2}${font}${freq_g 4} - ${if_match "${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >="90"}${color5}\
     ${else}${if_match "${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}" >= "80" < "90"}${color4}${endif}\
 ${endif}\
 ${font 5x7:size=9}${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'}°C ${font 5x7:size=9}${color}${alignr}  
-${color4}${font 5x7:size=10}Fan Speed: ${hwmon 3 fan 1} RPM${alignr}Load: ${cpu cpu0}%
+${color4}${font 5x7:size=10}Fan Speed: ${color}${hwmon 3 fan 1} RPM${color4}${alignr}Load: ${color}${cpu cpu0}%
  
 # Use this if the hwmon starts misbehaving ${ibm_fan}
 ${color4}${font 5x7:bold:size=10}PROCESSES ${hr 1} ${alignr}${processes} 
@@ -95,8 +95,8 @@ ${color2}${font}${top name 2}${goto 75}${color4}${top cpu 2}${goto 110}${top mem
 ${color2}${font}${top name 3}${goto 75}${color4}${top cpu 3}${goto 110}${top mem 3}${color2}${goto 150}${font}${top name 6}${color4}${goto 220}${top cpu 6}${goto 260}${top mem 6}
 
 ${color4}${font 5x7:bold:size=10}MEMORY ${hr 1}
-${color}${font}RAM ${alignr}$memperc% ($mem/${memmax})
-${color}${font}Swap${alignr}${swapperc}% ($swap/${swapmax})
+${color2}${font}RAM ${color}${alignr}$memperc% ${color4}($mem/${memmax})
+${color2}${font}Swap${color}${alignr}${swapperc}% ${color4}($swap/${swapmax})
 
 ${color4}${font 5x7:bold:size=10}DISK ${hr 1}     
 ${color2}${font}Arch: ${fs_free /} / ${fs_size /} ${color4}${alignr}${diskiograph sdb2 13,135 FFE652 C2FFF9 -l}
@@ -109,10 +109,10 @@ ${color4}${alignr}${diskiograph mmcblk0p1 13,135 FFE652 C2FFF9 -l}
 
 ${color4}${font 5x7:bold:size=10}NETWORK ${hr 1}
 ${color2}${font 5x7:bold:size=9}Net1 - Signal Strength ${alignr}${wireless_link_qual_perc wlp3s0}%
-${color}${font 5x7:size=9}Upload speed: ${upspeed wlp3s0} ${color}${font 5x7:size=9}${alignr}Down speed: ${downspeed wlp3s0}
+${color}${font 5x7:size=9}Upload speed: ${color2}${upspeed wlp3s0} ${color}${font 5x7:size=9}${alignr}Down speed: ${color2}${downspeed wlp3s0}
 ${upspeedgraph wlp3s0 18,148 FFE652 FFE652 -l}${alignr}${downspeedgraph wlp3s0 18,148 FFE652 FFE652 -l}
 ${color2}${font 5x7:bold:size=9}Net2 - Signal Strength ${alignr}${wireless_link_qual_perc wlp0s29u1u5}%
-${color}${font 5x7:size=9}Upload speed: ${upspeed wlp0s29u1u5} ${color}${font 5x7:size=9}${alignr}Down speed: ${downspeed wlp0s29u1u5}
+${color}${font 5x7:size=9}Upload speed: ${color2}${upspeed wlp0s29u1u5} ${color}${font 5x7:size=9}${alignr}Down speed: ${color2}${downspeed wlp0s29u1u5}
 ${upspeedgraph wlp0s29u1u5 18,148 71DFE7 71DFE7 -l}${alignr}${downspeedgraph wlp0s29u1u5 18,148 71DFE7 71DFE7 -l}
 
 ${color4}${font 5x7:bold:size=10}POWER ${hr 1}
@@ -120,7 +120,7 @@ ${color}${font 5x7:bold:size=9}Status: ${alignr}${battery_short} ${battery_time}
 ${if_match "${battery_percent}" <="25"}${color5}\
 ${else}${if_match "${battery_percent}" < "60" }${color4}${endif}\
 ${endif}\
-${color}${battery_bar 10,300}
-${color4}${font Source Code Pro Light:bold:size=16}${time %A}, ${color2 CDE0E7}${time  %b} ${color2}${time %d} ${color2}${time %Y}${font}
+${color4}${battery_bar 10,300}
+${color4}${alignc}${font Source Code Pro Light:bold:size=16}${time %A}, ${color2 CDE0E7}${time  %b} ${color2}${time %d} ${color2}${time %Y}${font}
 
 ]]
